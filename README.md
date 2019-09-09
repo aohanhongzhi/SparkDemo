@@ -66,3 +66,4 @@ java -jar demo-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 ```shell
 mvn javadoc:javadoc
 ```
+![](./asset/img/doc.png)
