@@ -6,20 +6,33 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Hello world!
+ * SparkJava App!
  *
  */
 public class App {
 	
 	private final static Logger log = LoggerFactory.getLogger(App.class);
 	
+	/**
+	 * Description:
+	 * <br>SparkJava框架的程序启动入口
+	 * @param args
+	 * @throws InterruptedException
+	 */
 	public static void main(String[] args) throws InterruptedException {
 		start();
 	}
 
+	/**
+	 * 各种方法
+	 * @throws InterruptedException
+	 */
 	static void start() throws InterruptedException {
 
 		System.out.println("http://localhost:4567/");
+		/**
+		 * 首页
+		 */
 		get("/", (req, res) -> "Hello SparkJava!");
 
 		get("/hello", (req, res) -> "Hello World!");
@@ -72,6 +85,9 @@ public class App {
 		
 		// Using string/html
 		notFound("<html><body><h1>Custom 404 handling</h1></body></html>");
+		/**
+		 * Description:<br>404 for json
+		 */
 		// Using Route
 		notFound((req, res) -> {
 		    res.type("application/json");
@@ -81,6 +97,9 @@ public class App {
 		// Using string/html
 		internalServerError("<html><body><h1>Custom 500 handling</h1></body></html>");
 		
+		/**
+		 * Description:<br>505 for json
+		 */
 		// Using Route
 		internalServerError((req, res) -> {
 		    res.type("application/json");

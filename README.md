@@ -49,12 +49,18 @@
         </plugins>
     </build>
 ```
-打包后的结果:
+打包
 ```shell
 mvn clean package -Dmaven.test.skip=true && cd target/
 ```
+
+打包后的结果:
+![](./asset/img/capcity.png)
 运行程序
 ```
 java -jar demo-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 ```
-![](./asset/img/capcity.png)
+生成doc文档
+```shell
+mvn javadoc:javadoc
+```
