@@ -2,7 +2,7 @@
 [![](https://img.shields.io/badge/%E6%A1%86%E6%9E%B6-Spark2.8.0-brightgreen.svg)](http://sparkjava.com)
 * sparkJava只有slf4j，自己添加了log4j2
 * 集成了spring-context，可以控制反转注入等。Bean同一管理，使代码更加简洁。
-* Route类只对应一个url貌似很麻烦！
+* Route类只对应一个url貌似很麻烦！但是仅从get，post方法看，Sparkjava更加简洁。
 ## 技术栈搭建
 对于一个小型的应用，快速搭建可以使用
 
