@@ -4,14 +4,25 @@ import static spark.Spark.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Service;
+
+import hxy.sparkjava.demo.route.UserRoute;
 
 /**
  * SparkJava App!
  *
  */
+@ComponentScan
+@Service
 public class App {
 	
 	private final static Logger log = LoggerFactory.getLogger(App.class);
+	
+	@Autowired
+	UserRoute userRoute;
 	
 	/**
 	 * Description:
@@ -20,14 +31,29 @@ public class App {
 	 * @throws InterruptedException
 	 */
 	public static void main(String[] args) throws InterruptedException {
-		start();
+//		start();
+		springStart();
+	}
+	
+	public static void springStart() throws InterruptedException {
+        try (
+                //初始化IOC容器
+                AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(App.class);
+        ) {
+            //通过IOC容器获得你要执行的业务代码的类
+        	App springMain = applicationContext.getBean(App.class);
+            //通过IOC容器获取到的类执行你的业务代码，可以认为是整个Spring程序的入口了，所有的代码都应该写在这之后了。不能再随意使用new了。否则Spring无法接管。
+            springMain.start();
+        } finally {
+            System.out.println("普通java程序(非Web应用)执行完成,IOC容器关闭。。。");
+        }
 	}
 
 	/**
 	 * 各种方法
 	 * @throws InterruptedException
 	 */
-	static void start() throws InterruptedException {
+	 void start() throws InterruptedException {
 
 		System.out.println("http://localhost:4567/");
 		/**
@@ -36,6 +62,8 @@ public class App {
 		get("/", (req, res) -> "Hello SparkJava!");
 
 		get("/hello", (req, res) -> "Hello World!");
+//		get("/hellos",new hxy.sparkjava.demo.route.UserRoute());
+		get("/hellos", userRoute);
 
 		// matches "GET /hello/foo" and "GET /hello/bar"
 		// request.params(":name") is 'foo' or 'bar'

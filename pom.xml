@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>hxy.sparkjava</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>spark</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
@@ -15,7 +14,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<log4j.version>2.5</log4j.version>
 	</properties>
-	
+
 
 	<dependencies>
 		<dependency>
@@ -29,13 +28,13 @@
 			<artifactId>spark-core</artifactId>
 			<version>2.8.0</version>
 		</dependency>
-		<dependency><!-- 桥接：告诉Slf4j使用Log4j2 -->
+		<dependency>			<!-- 桥接：告诉Slf4j使用Log4j2 -->
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-slf4j-impl</artifactId>
 			<version>2.2</version>
 			<optional>true</optional>
 		</dependency>
-		<dependency> <!-- 桥接：告诉commons logging使用Log4j2 -->
+		<dependency>			<!-- 桥接：告诉commons logging使用Log4j2 -->
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-jcl</artifactId>
 			<version>2.2</version>
@@ -61,15 +60,25 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.17</version>
 			<scope>compile</scope>
-			<!-- 防止将log4j2依赖传递到其他模块，打包运行后，log4j2将自动禁用 <scope>provided</scope> -->
+			<!-- 防止将log4j2依赖� 递到其他模块，打包运行后，log4j2将自动禁用 <scope>provided</scope> -->
 			<optional>true</optional>
 		</dependency>
-
 		<!-- log4j2 end -->
+		
+		<!-- Spring注入框架 -->
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>5.2.1.RELEASE</version>
+		</dependency>
+
+
+
 	</dependencies>
 	<build>
-        <plugins>
-        	<plugin>
+		<plugins>
+			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
 					<archive>
@@ -94,14 +103,14 @@
 					</execution>
 				</executions>
 			</plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
