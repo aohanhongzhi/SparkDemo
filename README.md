@@ -8,10 +8,11 @@
 
 应用层次 | 框架名 | 推荐理由
 --- | --- | ---
-前端交互|Sparkjava| 更加简单的url-方法
-服务层| Spring-context|控制翻转，Bean注入
-ORM层| rexdb|高效灵活简单
-数据库|postgresql|开源自由
+前端交互|[Sparkjava](http://sparkjava.com/)| 更加简单的url-方法
+服务层| [Spring-context](https://mvnrepository.com/artifact/org.springframework/spring-context)|控制翻转，Bean注入
+ORM层| [rexdb](http://db.rex-soft.org/)|高效灵活简单
+关系数据库|[postgresql](https://www.postgresql.org/)|开源自由
+缓存|[redis](https://redis.io/)|高效，轻量级
 
 
 
