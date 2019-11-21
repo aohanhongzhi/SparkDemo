@@ -11,8 +11,10 @@ import hxy.sparkjava.demo.service.UserService;
 public class UserServiceImpl implements UserService {
 	private final static Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 	@Override
-	public void select() {
+	public String select() {
 		log.info("UserServiceImpl测试");
+		
+		return "UserServiceImpl测试";
 	}
 
 }
