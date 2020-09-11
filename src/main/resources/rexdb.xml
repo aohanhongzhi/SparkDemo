@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//rex-soft.org//REXDB DTD 1.0//EN" "http://www.rex-soft.org/dtd/rexdb-1-config.dtd">
+<configuration>
+    <dataSource>
+        <property name="driverClassName" value="org.sqlite.JDBC" />
+        <property name="url" value="jdbc:sqlite:sparkjava.db" />
+        <!-- 如果用户名不可以空，可以设置为 root 密码可以注释 -->
+<!--        <property name="username" value="[数据库账户]" />-->
+<!--        <property name="password" value="[数据库密码]" />-->
+    </dataSource>
+</configuration>

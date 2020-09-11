@@ -2,6 +2,7 @@ package hxy.sparkjava.demo;
 
 import static spark.Spark.*;
 
+import hxy.sparkjava.demo.util.YourCustomException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +40,8 @@ public class App {
 
 	public static void springStart() throws InterruptedException {
 		try (
-				// 初始化IOC容器
-				AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-						App.class);) {
+			// 初始化IOC容器
+           AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(App.class);) {
 			// 通过IOC容器获得你要执行的业务代码的类
 			App springMain = applicationContext.getBean(App.class);
 			// 通过IOC容器获取到的类执行你的业务代码，可以认为是整个Spring程序的入口了，所有的代码都应该写在这之后了。不能再随意使用new了。否则Spring无法接管。
@@ -60,6 +60,17 @@ public class App {
 		//指定应用端口
 		port(4567);
 		System.out.println("http://localhost:4567/");
+
+        before((request, response) -> {
+            boolean authenticated = true;
+            log.info("当前访问的路径是"+request.url());
+            log.info("当前访问的路径是"+request.uri());
+            // ... check if authenticated
+            if (!authenticated) {
+                halt(401, "You are not welcome here");
+            }
+        });
+
 		/**
 		 * 首页
 		 */
@@ -67,7 +78,7 @@ public class App {
 
 		get("/hello", (req, res) -> "Hello World!");
 //		get("/hellos",new hxy.sparkjava.demo.route.UserRoute());
-		get("/hellos", userRoute);
+		get("/user", userRoute);
 
 		// matches "GET /hello/foo" and "GET /hello/bar"
 		// request.params(":name") is 'foo' or 'bar'
@@ -128,7 +139,13 @@ public class App {
 		});
 
 		// Using string/html
-		internalServerError("<html><body><h1>Custom 500 handling</h1></body></html>");
+//		internalServerError("<html><body><h1>Custom 500 handling</h1></body></html>");
+
+        // Using Route
+        internalServerError((req, res) -> {
+            res.type("application/json");
+            return "{\"message\":\"Custom 500 handling\"}";
+        });
 
 		/**
 		 * Description:<br>
@@ -140,15 +157,20 @@ public class App {
 			return "{\"message\":\"Custom 500 handling\"}";
 		});
 
+
 		get("/throwexception", (request, response) -> {
-			throw new YourCustomException();
+			throw new YourCustomException(request.url()+"请求错误");
 		});
 
-		exception(YourCustomException.class, (exception, request, response) -> {
+
+        exception(YourCustomException.class, (exception, request, response) -> {
 			// Handle the exception here
 		});
 
-		Thread.sleep(1000000);
+//        initExceptionHandler((e) -> System.out.println("Uh-oh"));
+
+
+        Thread.sleep(1000000);
 		System.out.println("stop!");
 		stop();
 

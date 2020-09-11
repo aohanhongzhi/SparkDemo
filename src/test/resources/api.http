@@ -1,0 +1,4 @@
+GET localhost:4567
+
+###
+GET localhost:4567/user?id=1

@@ -3,7 +3,7 @@
     <properties>
         <property name="LOG_HOME">./spark.log</property>
         <property name="FILE_NAME">spark</property>
-        <property name="log.sql.level">DEBUG</property>
+        <property name="log.sql.level">INFO</property>
     </properties>
     <!-- version  3.1.0 20190814 by findbugs-3.0.1 -->
 

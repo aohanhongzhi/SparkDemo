@@ -26,9 +26,10 @@ public class UserRoute implements Route{
 	public Object handle(Request request, Response response) throws Exception {
 		log.info("访问路由！");
 
-		
-		
-		return "自定义router，"+userService.select();
+        String id = request.queryParamOrDefault("id", "1");
+
+
+        return "自定义router，"+userService.select(Integer.parseInt(id));
 	}
     
 }
