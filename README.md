@@ -3,6 +3,16 @@
 * sparkJava只有slf4j，自己添加了log4j2
 * 集成了spring-context，可以控制反转注入等。Bean同一管理，使代码更加简洁。
 * Route类只对应一个url貌似很麻烦！但是仅从get，post方法看，Sparkjava更加简洁。
+
+### 2022/01/25
+
+sparkjava是编程式的web框架，与常见的SpringBoot截然不同，SpringBoot是声明式的框架。
+
+sparkjava的风格更像是go-gin，tornado一类的编程式框架。
+
+所以把SparkJava和Spring-Context结合可能有点违背初衷！这种框架本身就是微型框架，所以Service层直接静态方法就好了。不需要啥容器管。
+当然如果使用一些轻量级的容器框架也可以考虑下。
+
 ## 技术栈搭建
 对于一个小型的应用，快速搭建可以使用
 
@@ -72,7 +82,9 @@ mvn clean package -Dmaven.test.skip=true && cd target/
 ```
 
 #### 打包后的结果:
+
 ![](./asset/img/capcity.png)
+
 #### 运行程序
 ```
 java -jar demo-0.0.1-SNAPSHOT-jar-with-dependencies.jar
