@@ -59,7 +59,7 @@ public class App {
 	void start() throws InterruptedException {
 		//指定应用端口
 		port(4567);
-		System.out.println("http://localhost:4567/");
+		log.info("http://localhost:4567/");
 
         before((request, response) -> {
             boolean authenticated = true;

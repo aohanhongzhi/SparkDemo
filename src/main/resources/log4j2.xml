@@ -14,8 +14,8 @@
 
 
 <!--            <PatternLayout pattern="%6r [seq%5sn] [%-26.26t] %-5level %-20c{1} - %msg%n" />-->
-
-                        <PatternLayout pattern=" %-d{HH:mm:ss} [%t] %highlight{[ %p ] %l :} %m%n"/>
+            <PatternLayout  pattern="%d{HH:mm:ss.SSS} [%thread] %highlight{%-5level} %yellow{%class.%method} \(%file:%line\) - %msg%n"  disableAnsi="false" noConsoleNoAnsi="false"/>
+<!--                        <PatternLayout pattern=" %-d{HH:mm:ss} [%t] %highlight{[ %p ] %l :} %m%n"/>-->
 <!--            <PatternLayout pattern="%highlight{[ %p ] [%-d{yyyy-MM-dd HH:mm:ss}] [ LOGID:%X{logid} ] [%l] %m%n}"/>-->
 
         </Console>
