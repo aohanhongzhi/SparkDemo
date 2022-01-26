@@ -1,4 +1,13 @@
 GET localhost:4567
+token:aa
 
-###
+### user
 GET localhost:4567/user?id=1
+token:aa
+
+### user 2
+GET localhost:4567/user?id=12
+token:aa
+
+### hello
+GET localhost:4567/hello

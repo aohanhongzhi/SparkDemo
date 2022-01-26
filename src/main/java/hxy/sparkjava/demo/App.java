@@ -1,5 +1,6 @@
 package hxy.sparkjava.demo;
 
+import com.google.gson.Gson;
 import hxy.sparkjava.demo.route.EmailApi;
 import hxy.sparkjava.demo.route.UserRoute;
 import hxy.sparkjava.demo.util.YourCustomException;
@@ -15,6 +16,7 @@ import static spark.Spark.delete;
 import static spark.Spark.exception;
 import static spark.Spark.get;
 import static spark.Spark.halt;
+import static spark.Spark.initExceptionHandler;
 import static spark.Spark.internalServerError;
 import static spark.Spark.notFound;
 import static spark.Spark.options;
@@ -71,12 +73,21 @@ public class App {
         port(4567);
         log.info("http://localhost:4567/");
 
+        // 这个必须在route的上面
+        initExceptionHandler((e) -> log.error("Uh-oh"));
+
+
         before((request, response) -> {
             boolean authenticated = true;
             log.info("当前访问的路径是{}，当前访问的PATH是{}", request.url(), request.uri());
             // ... check if authenticated
-            if (!authenticated) {
-                halt(401, "You are not welcome here");
+            String token = request.headers("token");
+            if (token != null) {
+                if (!authenticated) {
+                    halt(401, "You are not welcome here");
+                }
+            } else {
+                halt(401, "please add token in header");
             }
         });
 
@@ -87,7 +98,9 @@ public class App {
 
         get("/hello", (req, res) -> "Hello World!");
 //		get("/hellos",new hxy.sparkjava.demo.route.UserRoute());
-        get("/user", userRoute);
+
+        Gson gson = new Gson();
+        get("/user", userRoute, gson::toJson);
 
         // matches "GET /hello/foo" and "GET /hello/bar"
         // request.params(":name") is 'foo' or 'bar'
@@ -150,12 +163,6 @@ public class App {
         // Using string/html
 //		internalServerError("<html><body><h1>Custom 500 handling</h1></body></html>");
 
-        // Using Route
-        internalServerError((req, res) -> {
-            res.type("application/json");
-            return "{\"message\":\"Custom 500 handling\"}";
-        });
-
         /**
          * Description:<br>
          * 505 for json
@@ -176,11 +183,9 @@ public class App {
             // Handle the exception here
         });
 
-//        initExceptionHandler((e) -> System.out.println("Uh-oh"));
-
 
         Thread.sleep(1000000);
-        System.out.println("stop!");
+        log.error("stop!");
         stop();
 
     }

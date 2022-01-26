@@ -1,5 +1,6 @@
 # SparkDemo
-[![](https://img.shields.io/badge/%E6%A1%86%E6%9E%B6-Spark2.8.0-brightgreen.svg)](http://sparkjava.com)
+
+[![](https://img.shields.io/badge/%E6%A1%86%E6%9E%B6-Spark2.9.3-brightgreen.svg)](http://sparkjava.com)
 * sparkJava只有slf4j，自己添加了log4j2
 * 集成了spring-context，可以控制反转注入等。Bean同一管理，使代码更加简洁。
 * Route类只对应一个url貌似很麻烦！但是仅从get，post方法看，Sparkjava更加简洁。
@@ -14,6 +15,7 @@ sparkjava的风格更像是go-gin，tornado一类的编程式框架。
 当然如果使用一些轻量级的容器框架也可以考虑下。
 
 ## 技术栈搭建
+
 对于一个小型的应用，快速搭建可以使用
 
 应用层次 | 框架名 | 推荐理由
@@ -27,7 +29,9 @@ ORM层| [rexdb](http://db.rex-soft.org/)|高效灵活简单
 
 
 ## 体验感
+
 作为一款java的Web框架，确实觉得Spark要比SpringMVC更加的简洁，而且大量使用lambda表达式，使程序写的更加简洁紧凑。由于没有深入了解，作为一个独立的web应用而言，Spark显然要比SpringMVC更加的轻量化，更加简洁，也就是说Spark更加适合比较小型简单的应用开发。但是Spring的生态要比Spark更加丰富，作为企业级开发自然首选Spring全家桶。
+
 ## SparkJava
 #### 官网：http://sparkjava.com
 #### github：https://github.com/perwendel/spark
@@ -94,6 +98,13 @@ java -jar demo-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 mvn javadoc:javadoc
 ```
 ![](./asset/img/doc.png)
+
+#### 返回json格式数据
+
+感觉sparkjava没有比较好的json处理方式，没有找到全局json序列化。只能一个个的来。
+
+
+http://sparkjava.com/documentation#response-transformer
 
 
 ### log
