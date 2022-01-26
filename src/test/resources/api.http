@@ -11,3 +11,12 @@ token:aa
 
 ### hello
 GET localhost:4567/hello
+
+
+### post
+POST localhost:4567/post
+token:aa
+
+###
+GET localhost:4567/throwexception
+token:aa

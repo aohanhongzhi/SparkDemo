@@ -111,11 +111,13 @@ public class App {
         // matches "GET /say/hello/to/world"
         // request.splat()[0] is 'hello' and request.splat()[1] 'world'
         get("/say/*/to/*", (request, response) -> {
+            response.status(200);
             return "Number of splat parameters: " + request.splat().length;
         });
 
         post("/post", (request, response) -> {
             // Create something
+            response.status(201);
             return "post";
         });
 
@@ -148,6 +150,10 @@ public class App {
 //		    });
         });
 
+        get("/throwexception", (request, response) -> {
+            throw new YourCustomException(request.url() + "请求错误");
+        });
+
         // Using string/html
         notFound("<html><body><h1>Custom 404 handling</h1></body></html>");
         /**
@@ -171,11 +177,6 @@ public class App {
         internalServerError((req, res) -> {
             res.type("application/json");
             return "{\"message\":\"Custom 500 handling\"}";
-        });
-
-
-        get("/throwexception", (request, response) -> {
-            throw new YourCustomException(request.url() + "请求错误");
         });
 
 
