@@ -1,7 +1,7 @@
 package hxy.sparkjava.demo;
 
-import static spark.Spark.*;
-
+import hxy.sparkjava.demo.route.EmailApi;
+import hxy.sparkjava.demo.route.UserRoute;
 import hxy.sparkjava.demo.util.YourCustomException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +10,19 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
 
-import hxy.sparkjava.demo.route.EmailApi;
-import hxy.sparkjava.demo.route.UserRoute;
+import static spark.Spark.before;
+import static spark.Spark.delete;
+import static spark.Spark.exception;
+import static spark.Spark.get;
+import static spark.Spark.halt;
+import static spark.Spark.internalServerError;
+import static spark.Spark.notFound;
+import static spark.Spark.options;
+import static spark.Spark.path;
+import static spark.Spark.port;
+import static spark.Spark.post;
+import static spark.Spark.put;
+import static spark.Spark.stop;
 
 /**
  * SparkJava App!
@@ -23,7 +34,7 @@ public class App {
     private final static Logger log = LoggerFactory.getLogger(App.class);
 
     @Autowired
-    UserRoute userRoute;
+    private UserRoute userRoute;
 
     /**
      * Description: <br>
