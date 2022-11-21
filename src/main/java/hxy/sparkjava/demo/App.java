@@ -81,20 +81,22 @@ public class App {
             boolean authenticated = true;
             log.info("当前访问的路径是{}，当前访问的PATH是{}", request.url(), request.uri());
             // ... check if authenticated
-            String token = request.headers("token");
-            if (token != null) {
-                if (!authenticated) {
-                    halt(401, "You are not welcome here");
+            if (!"/".equals(request.uri())) {
+                String token = request.headers("token");
+                if (token != null) {
+                    if (!authenticated) {
+                        halt(401, "You are not welcome here");
+                    }
+                } else {
+                    halt(401, "please add token in header");
                 }
-            } else {
-                halt(401, "please add token in header");
             }
         });
 
         /**
          * 首页
          */
-        get("/", (req, res) -> "Hello SparkJava!");
+        get("/", (req, res) -> "Hello SparkJava! http://sparkjava.com/");
 
         get("/hello", (req, res) -> "Hello World!");
 //		get("/hellos",new hxy.sparkjava.demo.route.UserRoute());
