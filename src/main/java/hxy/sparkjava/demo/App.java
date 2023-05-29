@@ -96,9 +96,9 @@ public class App {
         /**
          * 首页
          */
-        get("/", (req, res) -> "Hello SparkJava! http://sparkjava.com/");
+        get("/", (req, res) -> "Hello SparkJava! 框架 http://sparkjava.com/ ");
 
-        get("/hello", (req, res) -> "Hello World!");
+        get("/hello", (req, res) -> "Hello World! 你好世界！");
 //		get("/hellos",new hxy.sparkjava.demo.route.UserRoute());
 
         Gson gson = new Gson();
